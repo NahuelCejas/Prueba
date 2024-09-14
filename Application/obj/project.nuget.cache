@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "n8lwzsOw/Gw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nahue\\Downloads\\TP1-Rocio_Kreickv6\\TP1-Rocio_Kreick\\TP1-Rocio_Kreick\\Application\\Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nahue\\.nuget\\packages\\fluentvalidation\\11.9.2\\fluentvalidation.11.9.2.nupkg.sha512"
+  ],
+  "logs": []
+}

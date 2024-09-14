@@ -1,0 +1,22 @@
+C:\Users\PC\Documents\FACULTAD\Proyecto Software\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\bin\Debug\net8.0\Domain.deps.json
+C:\Users\PC\Documents\FACULTAD\Proyecto Software\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\bin\Debug\net8.0\Domain.dll
+C:\Users\PC\Documents\FACULTAD\Proyecto Software\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\bin\Debug\net8.0\Domain.pdb
+C:\Users\PC\Documents\FACULTAD\Proyecto Software\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Documents\FACULTAD\Proyecto Software\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\Users\PC\Documents\FACULTAD\Proyecto Software\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\Users\PC\Documents\FACULTAD\Proyecto Software\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\PC\Documents\FACULTAD\Proyecto Software\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.dll
+C:\Users\PC\Documents\FACULTAD\Proyecto Software\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\refint\Domain.dll
+C:\Users\PC\Documents\FACULTAD\Proyecto Software\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.pdb
+C:\Users\PC\Documents\FACULTAD\Proyecto Software\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\ref\Domain.dll
+C:\Users\nahue\Downloads\TP1-Rocio_Kreickv6\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\bin\Debug\net8.0\Domain.deps.json
+C:\Users\nahue\Downloads\TP1-Rocio_Kreickv6\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\bin\Debug\net8.0\Domain.dll
+C:\Users\nahue\Downloads\TP1-Rocio_Kreickv6\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\bin\Debug\net8.0\Domain.pdb
+C:\Users\nahue\Downloads\TP1-Rocio_Kreickv6\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nahue\Downloads\TP1-Rocio_Kreickv6\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\Users\nahue\Downloads\TP1-Rocio_Kreickv6\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\Users\nahue\Downloads\TP1-Rocio_Kreickv6\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\nahue\Downloads\TP1-Rocio_Kreickv6\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.dll
+C:\Users\nahue\Downloads\TP1-Rocio_Kreickv6\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\refint\Domain.dll
+C:\Users\nahue\Downloads\TP1-Rocio_Kreickv6\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\Domain.pdb
+C:\Users\nahue\Downloads\TP1-Rocio_Kreickv6\TP1-Rocio_Kreick\TP1-Rocio_Kreick\Domain\obj\Debug\net8.0\ref\Domain.dll
