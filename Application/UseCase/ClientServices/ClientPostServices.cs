@@ -37,14 +37,15 @@ namespace Application.UseCase.ClientServices
         }
 
         private static Client MapRequestToClient(ClientsRequest request)
-        {
+        {    
+
             return new Client
             {
-                Name = request.Name,
-                Address = request.Address,
-                Phone = request.Phone,
-                Company = request.Company,
-                Email = request.Email,
+                Name = request.Name!,
+                Address = request.Address!,
+                Phone = request.Phone!,
+                Company = request.Company!,
+                Email = request.Email!,
                 CreateDate = DateTime.Now
             };
         }

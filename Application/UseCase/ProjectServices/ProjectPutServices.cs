@@ -59,7 +59,7 @@ namespace Application.UseCase.ProjectServices
 
         private static void UpdateTaskFromRequest(Domain.Entities.Task task, TasksRequest request)
         {
-            task.Name = request.Name;
+            task.Name = request.Name!;
             task.DueDate = request.DueDate;
             task.Status = request.Status;
             task.AssignedTo = request.User;

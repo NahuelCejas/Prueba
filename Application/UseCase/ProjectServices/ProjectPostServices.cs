@@ -47,7 +47,7 @@ namespace Application.UseCase.ProjectServices
         {
             return new Domain.Entities.Project
             {
-                ProjectName = request.Name,
+                ProjectName = request.Name!,
                 StartDate = request.Start,
                 EndDate = request.End,
                 ClientID = request.Client,

@@ -107,7 +107,7 @@ namespace Application.UseCase.ProjectServices
         {
             return new Interaction
             {
-                Notes = request.Notes,
+                Notes = request.Notes!,
                 Date = request.Date,
                 InteractionType = request.InteractionType,
                 ProjectID = projectId
@@ -134,7 +134,7 @@ namespace Application.UseCase.ProjectServices
         {
             return new Domain.Entities.Task
             {
-                Name = request.Name,
+                Name = request.Name!,
                 ProjectID = projectId,
                 Status = request.Status,
                 AssignedTo = request.User,
