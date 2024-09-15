@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
 {
-    public class SeedData
+    public static class SeedData
     {
         public static void Seed(ModelBuilder modelBuilder)
         {
