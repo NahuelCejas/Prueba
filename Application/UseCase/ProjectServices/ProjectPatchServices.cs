@@ -36,12 +36,12 @@ namespace Application.UseCase.ProjectServices
         }
 
 
-        public async Task<Interactions> AddInteraction(Guid projectID, InteractionsRequest iRequest)
+        public async Task<Interactions> AddInteraction(Guid projectId, InteractionsRequest request)
         {
-             await _interactionsValidator.Validate(iRequest);
+             await _interactionsValidator.Validate(request);
             try
             {
-                Domain.Entities.Project project = await _projectQuery.GetProjectById(projectID);
+                Domain.Entities.Project project = await _projectQuery.GetProjectById(projectId);
 
                 if (project == null)
                 {
@@ -50,10 +50,10 @@ namespace Application.UseCase.ProjectServices
 
                 var nInteraction = new Interaction
                 {
-                    Notes = iRequest.Notes,
-                    Date = iRequest.Date,
-                    InteractionType = iRequest.InteractionType,
-                    ProjectID = projectID
+                    Notes = request.Notes,
+                    Date = request.Date,
+                    InteractionType = request.InteractionType,
+                    ProjectID = projectId
 
                 };
 
@@ -89,13 +89,13 @@ namespace Application.UseCase.ProjectServices
             }
         }
 
-        public async Task<Tasks> AddTask(Guid projectID, TasksRequest tRequest)
+        public async Task<Tasks> AddTask(Guid projectId, TasksRequest request)
         {
-            await _tasksValidator.Validate(tRequest);
+            await _tasksValidator.Validate(request);
 
             try
             {
-                Domain.Entities.Project project = await _projectQuery.GetProjectById(projectID);
+                Domain.Entities.Project project = await _projectQuery.GetProjectById(projectId);
 
                 if (project == null)
                 {
@@ -104,11 +104,11 @@ namespace Application.UseCase.ProjectServices
 
                 var nTask = new Domain.Entities.Task
                 {
-                    Name = tRequest.Name,
-                    ProjectID = projectID,
-                    Status = tRequest.Status,
-                    AssignedTo = tRequest.User,
-                    DueDate = tRequest.DueDate,
+                    Name = request.Name,
+                    ProjectID = projectId,
+                    Status = request.Status,
+                    AssignedTo = request.User,
+                    DueDate = request.DueDate,
                     CreateDate = DateTime.Now,
                 };
 

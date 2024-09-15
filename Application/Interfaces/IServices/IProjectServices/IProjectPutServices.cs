@@ -12,7 +12,7 @@ namespace Application.Interfaces.IServices.IProjectServices
 {
     public interface IProjectPutServices
     {
-        public Task<Tasks> UpdateTask(Guid taskId, TasksRequest task);
+        public Task<Tasks> UpdateTask(Guid taskId, TasksRequest request);
 
     }
 

@@ -28,28 +28,28 @@ namespace Application.UseCase.ProjectServices
             _validator = validator;
         }
 
-        public async Task<Tasks> UpdateTask(Guid taskID, TasksRequest tRequest)
+        public async Task<Tasks> UpdateTask(Guid taskId, TasksRequest request)
         {
-             await _validator.Validate(tRequest);
+             await _validator.Validate(request);
 
             try
             {
-                var task = await _taskQuery.GetTaskById(taskID);
+                var task = await _taskQuery.GetTaskById(taskId);
 
                 if (task == null)
                 {
                     throw new NotFoundException("Task not found");
                 }
 
-                task.Name = tRequest.Name;
-                task.DueDate = tRequest.DueDate;
-                task.Status = tRequest.Status;
-                task.AssignedTo = tRequest.User;
+                task.Name = request.Name;
+                task.DueDate = request.DueDate;
+                task.Status = request.Status;
+                task.AssignedTo = request.User;
                 task.UpdateDate = DateTime.Now;
 
                 await _projectCommand.UpdateProjectTasks(task);
 
-                var uTask = await _taskQuery.GetTaskById(taskID);
+                var uTask = await _taskQuery.GetTaskById(taskId);
 
                 if (uTask == null)
                 {

@@ -14,7 +14,7 @@ namespace Application.Interfaces.IServices.IProjectServices
     {
         public Task<Interactions> AddInteraction(Guid projectId, InteractionsRequest request);
 
-        public Task<Tasks> AddTask(Guid projectId, TasksRequest task);
+        public Task<Tasks> AddTask(Guid projectId, TasksRequest request);
 
     }
 
