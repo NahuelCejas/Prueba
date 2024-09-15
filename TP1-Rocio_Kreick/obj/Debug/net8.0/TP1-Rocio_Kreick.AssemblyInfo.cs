@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TP1-Rocio_Kreick")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7c79d6e5373dfb96e6572168c9679bb32916f21")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98756e1f3693b4068f25a92d4ad04d7d8fdf88cb")]
 [assembly: System.Reflection.AssemblyProductAttribute("TP1-Rocio_Kreick")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TP1-Rocio_Kreick")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

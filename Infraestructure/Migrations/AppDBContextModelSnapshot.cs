@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
+    // NOSONAR
     [DbContext(typeof(AppDBContext))]
     partial class AppDBContextModelSnapshot : ModelSnapshot
     {
@@ -441,4 +442,5 @@ namespace Infrastructure.Migrations
 #pragma warning restore 612, 618
         }
     }
+    // NOSONAR
 }

@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.IQuery;
+﻿using Application.Exceptions;
+using Application.Interfaces.IQuery;
 using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,12 @@ namespace Infrastructure.Query
         public async Task<InteractionType> GetInteractionTypeById(int id)
         {
             var result = await _context.InteractionTypes.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (result == null)
+            {
+                throw new NotFoundException("InteractionType not found");
+            }
+
             return result;
         }
     }

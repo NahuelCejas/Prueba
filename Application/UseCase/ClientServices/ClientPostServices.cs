@@ -25,35 +25,41 @@ namespace Application.UseCase.ClientServices
             _validator = validator;
         }
 
-
         public async Task<Clients> CreateClient(ClientsRequest request)
         {
             await _validator.Validate(request);
 
-            Client client = new Client();
-            {
-                client.Name = request.Name;
-                client.Address = request.Address;
-                client.Phone = request.Phone;
-                client.Company = request.Company;
-                client.Email = request.Email;
-                client.CreateDate = DateTime.Now;
-            }
+            Client client = MapRequestToClient(request);
             await _command.InsertClient(client);
 
-            Clients clientResponse = new Clients();
-            {
-                clientResponse.Id = client.ClientID;
-                clientResponse.Name = client.Name;
-                clientResponse.Address = client.Address;
-                clientResponse.Phone = client.Phone;
-                clientResponse.Company = client.Company;
-                clientResponse.Email = client.Email;
-            }
-
+            Clients clientResponse = MapClientToResponse(client);
             return clientResponse;
         }
 
-       
+        private Client MapRequestToClient(ClientsRequest request)
+        {
+            return new Client
+            {
+                Name = request.Name,
+                Address = request.Address,
+                Phone = request.Phone,
+                Company = request.Company,
+                Email = request.Email,
+                CreateDate = DateTime.Now
+            };
+        }
+
+        private Clients MapClientToResponse(Client client)
+        {
+            return new Clients
+            {
+                Id = client.ClientID,
+                Name = client.Name,
+                Address = client.Address,
+                Phone = client.Phone,
+                Company = client.Company,
+                Email = client.Email
+            };
+        }
     }
 }

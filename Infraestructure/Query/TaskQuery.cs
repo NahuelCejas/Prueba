@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.IQuery;
+﻿using Application.Exceptions;
+using Application.Interfaces.IQuery;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,6 +25,11 @@ namespace Infrastructure.Query
                 .Include(t => t.Users)
                 .Include(t => t.TaskStatus)
                 .FirstOrDefaultAsync(t => t.TaskID == TaskId);
+
+            if (result == null)
+            {
+                throw new NotFoundException("Task not found");
+            }
 
             return result;
         }

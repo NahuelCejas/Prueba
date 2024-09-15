@@ -10,9 +10,9 @@ namespace Application.Response
     {
         
         public Guid Id { get; set; }
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
         public DateTime Date { get; set; }
         public Guid ProjectId { get; set; }
-        public GenericResponse InteractionType { get; set; }
+        public GenericResponse? InteractionType { get; set; }
     }
 }

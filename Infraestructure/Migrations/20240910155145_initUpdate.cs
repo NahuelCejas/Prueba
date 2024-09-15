@@ -4,6 +4,7 @@
 
 namespace Infrastructure.Migrations
 {
+    // NOSONAR
     /// <inheritdoc />
     public partial class initUpdate : Migration
     {
@@ -19,4 +20,5 @@ namespace Infrastructure.Migrations
 
         }
     }
+    // NOSONAR
 }

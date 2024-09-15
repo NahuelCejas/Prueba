@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
+    // NOSONAR
+
     /// <inheritdoc />
     public partial class init : Migration
     {
@@ -287,4 +289,6 @@ namespace Infrastructure.Migrations
                 name: "Clients");
         }
     }
+
+    // NOSONAR
 }

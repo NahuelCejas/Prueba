@@ -11,7 +11,7 @@ namespace Application.UseCase.InteractionTypeServices
 {
     public class InteractionTypeGetServices : IInteractionTypeGetServices
     {
-        private IInteractionTypeQuery _query;
+        private readonly IInteractionTypeQuery _query;
 
         public InteractionTypeGetServices(IInteractionTypeQuery query)
         {

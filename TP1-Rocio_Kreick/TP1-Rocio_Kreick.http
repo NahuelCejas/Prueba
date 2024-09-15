@@ -1,6 +1,0 @@
-@TP1_Rocio_Kreick_HostAddress = http://localhost:5241
-
-GET {{TP1_Rocio_Kreick_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.IQuery;
+﻿using Application.Exceptions;
+using Application.Interfaces.IQuery;
 using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,11 @@ namespace Infrastructure.Query
             var interaction = await _context.Interactions
                 .Include(i => i.InteractionTypes)
                 .FirstOrDefaultAsync(c => c.InteractionID == id);
+
+            if (interaction == null)
+            {
+                throw new NotFoundException("Interaction not found"); 
+            }
 
             return interaction;
         }

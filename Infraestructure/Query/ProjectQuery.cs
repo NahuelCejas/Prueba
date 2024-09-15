@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.IQuery;
+﻿using Application.Exceptions;
+using Application.Interfaces.IQuery;
 using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -32,12 +33,22 @@ namespace Infrastructure.Query
                     .ThenInclude(t => t.Users)
                 .FirstOrDefaultAsync(p => p.ProjectID == id);
 
+            if (project == null)
+            {
+                throw new NotFoundException("Project not found");
+            }
+
             return project;
         }
 
         public async Task<Project>  GetProjectByName(string name)
         {
             var project = await _context.Projects.FirstOrDefaultAsync(p => p.ProjectName == name);
+
+            if (project == null)
+            {
+                throw new NotFoundException("Project not found");
+            }
 
             return project;
         }
