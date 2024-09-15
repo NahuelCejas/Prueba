@@ -23,7 +23,7 @@ namespace Domain.Entities
 
         public CampaignType? CampaignTypes { get; set; }
 
-        public ICollection<Task>? ListTasks { get; set; }
-        public ICollection<Interaction>? ListInteractions { get; set; }
+        public ICollection<Task> ListTasks { get; set; }
+        public ICollection<Interaction> ListInteractions { get; set; }
     }
 }

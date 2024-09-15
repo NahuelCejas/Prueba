@@ -11,6 +11,6 @@ namespace Domain.Entities
         public int Id { get; set; }
         public string? Name { get; set; }
 
-        public ICollection<Interaction>? ListInteractions { get; set; }
+        public ICollection<Interaction> ListInteractions { get; set; }
     }
 }

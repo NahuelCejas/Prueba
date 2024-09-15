@@ -11,6 +11,6 @@ namespace Domain.Entities
         public int Id { get; set; }
         public string? Name { get; set; }
 
-        public ICollection<Project>? ListProjects { get; set; }
+        public ICollection<Project> ListProjects { get; set; }
     }
 }

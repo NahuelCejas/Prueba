@@ -17,6 +17,6 @@ namespace Domain.Entities
 
         public DateTime CreateDate { get; set; }
 
-        public ICollection<Project>? ListProjects { get; set; }
+        public ICollection<Project> ListProjects { get; set; }
     }
 }
