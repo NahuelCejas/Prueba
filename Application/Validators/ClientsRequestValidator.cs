@@ -27,8 +27,9 @@ namespace Application.Validators
 
             RuleFor(x => x.Phone)
             .NotEmpty()
-            .Matches(@"^\+?\d{10,15}$") 
-            .WithMessage("A valid phone number is required.");
+            .Matches(@"^\+?\d{10,15}$")  // Validate phone numbers with international format
+            .WithMessage("A valid phone number is required. The number must be 10 to 15 digits long, " +
+            "with no spaces, and can optionally start with '+'. Examples: +54911345678901, 11345678901");
 
             RuleFor(x => x.Address)
             .NotEmpty()
