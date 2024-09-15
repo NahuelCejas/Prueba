@@ -36,7 +36,7 @@ namespace Application.UseCase.ClientServices
             return clientResponse;
         }
 
-        private Client MapRequestToClient(ClientsRequest request)
+        private static Client MapRequestToClient(ClientsRequest request)
         {
             return new Client
             {
@@ -49,7 +49,7 @@ namespace Application.UseCase.ClientServices
             };
         }
 
-        private Clients MapClientToResponse(Client client)
+        private static Clients MapClientToResponse(Client client)
         {
             return new Clients
             {

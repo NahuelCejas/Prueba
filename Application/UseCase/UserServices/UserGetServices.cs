@@ -23,8 +23,6 @@ namespace Application.UseCase.UserServices
         {
             var result = await _query.GetListUsers();
 
-
-
             List<Users> usersList = new List<Users>();
 
             foreach (var item in result)

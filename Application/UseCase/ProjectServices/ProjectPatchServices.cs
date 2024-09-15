@@ -38,7 +38,8 @@ namespace Application.UseCase.ProjectServices
 
         public async Task<Interactions> AddInteraction(Guid projectId, InteractionsRequest request)
         {
-             await _interactionsValidator.Validate(request);
+            await _interactionsValidator.Validate(request);
+
             try
             {
                 Domain.Entities.Project project = await _projectQuery.GetProjectById(projectId);
@@ -48,16 +49,8 @@ namespace Application.UseCase.ProjectServices
                     throw new NotFoundException("Project not found");
                 }
 
-                var nInteraction = new Interaction
-                {
-                    Notes = request.Notes,
-                    Date = request.Date,
-                    InteractionType = request.InteractionType,
-                    ProjectID = projectId
-
-                };
-
-                await _projectCommand.AddProjectInteractions(nInteraction);
+                Interaction nInteraction = MapRequestToInteraction(projectId, request);
+                await _projectCommand.AddProjectInteractions(nInteraction);               
 
                 project.UpdateDate = DateTime.Now;
                 await _projectCommand.UpdateProject(project);
@@ -69,25 +62,13 @@ namespace Application.UseCase.ProjectServices
                     throw new NotFoundException("Interaction not found");
                 }
 
-                return new Interactions
-                {
-                    Id = interactionAdd.InteractionID,
-                    ProjectId = interactionAdd.ProjectID,
-                    Notes = interactionAdd.Notes,
-                    Date = interactionAdd.Date,
-                    
-                    InteractionType = new GenericResponse
-                    {
-                        Id = interactionAdd.InteractionTypes.Id,
-                        Name = interactionAdd.InteractionTypes.Name
-                    }
-                };
+                return MapInteractionToResponse(interactionAdd);                
             }
             catch (NotFoundException ex)
             {
                 throw new NotFoundException(ex.Message);
             }
-        }
+        }        
 
         public async Task<Tasks> AddTask(Guid projectId, TasksRequest request)
         {
@@ -102,50 +83,87 @@ namespace Application.UseCase.ProjectServices
                     throw new NotFoundException("Project not found");
                 }
 
-                var nTask = new Domain.Entities.Task
-                {
-                    Name = request.Name,
-                    ProjectID = projectId,
-                    Status = request.Status,
-                    AssignedTo = request.User,
-                    DueDate = request.DueDate,
-                    CreateDate = DateTime.Now,
-                };
-
+                var nTask = MapRequestToTask(projectId, request);
                 await _projectCommand.AddProjectTasks(nTask);
 
                 project.UpdateDate = DateTime.Now;
-
                 await _projectCommand.UpdateProject(project);
 
                 var taskAdd = await _taskQuery.GetTaskById(nTask.TaskID);
-
-                return new Tasks
+                if (taskAdd == null)
                 {
-                    Id = taskAdd.TaskID,
-                    Name = taskAdd.Name,
-                    DueDate = taskAdd.DueDate,
-                    ProjectId = taskAdd.ProjectID,
-                    Status = new GenericResponse
-                    {
-                        Id = taskAdd.TaskStatus.Id,
-                        Name = taskAdd.TaskStatus.Name
-                    },
-                    UserAssigned = new Users
-                    {
-                        Id = taskAdd.Users.UserID,
-                        Name = taskAdd.Users.Name,
-                        Email = taskAdd.Users.Email
-                    }
-                };
+                    throw new NotFoundException("Task not found");
+                }
 
+                return MapTaskToResponse(taskAdd);
             }
             catch (NotFoundException ex)
             {
                 throw new NotFoundException(ex.Message);
             }
         }
-    }
 
+        private static Interaction MapRequestToInteraction(Guid projectId, InteractionsRequest request)
+        {
+            return new Interaction
+            {
+                Notes = request.Notes,
+                Date = request.Date,
+                InteractionType = request.InteractionType,
+                ProjectID = projectId
+            };
+        }
+
+        private static Interactions MapInteractionToResponse(Interaction interaction)
+        {
+            return new Interactions
+            {
+                Id = interaction.InteractionID,
+                ProjectId = interaction.ProjectID,
+                Notes = interaction.Notes,
+                Date = interaction.Date,
+                InteractionType = interaction.InteractionTypes != null ? new GenericResponse
+                {
+                    Id = interaction.InteractionTypes.Id,
+                    Name = interaction.InteractionTypes.Name
+                } : null
+            };
+        }
+
+        private static Domain.Entities.Task MapRequestToTask(Guid projectId, TasksRequest request)
+        {
+            return new Domain.Entities.Task
+            {
+                Name = request.Name,
+                ProjectID = projectId,
+                Status = request.Status,
+                AssignedTo = request.User,
+                DueDate = request.DueDate,
+                CreateDate = DateTime.Now,
+            };
+        }
+
+        private static Tasks MapTaskToResponse(Domain.Entities.Task task)
+        {
+            return new Tasks
+            {
+                Id = task.TaskID,
+                Name = task.Name,
+                DueDate = task.DueDate,
+                ProjectId = task.ProjectID,
+                Status = task.TaskStatus != null ? new GenericResponse
+                {
+                    Id = task.TaskStatus.Id,
+                    Name = task.TaskStatus.Name
+                } : null,
+                UserAssigned = task.Users != null ? new Users
+                {
+                    Id = task.Users.UserID,
+                    Name = task.Users.Name,
+                    Email = task.Users.Email
+                } : null
+            };
+        }
+    }
 
 }

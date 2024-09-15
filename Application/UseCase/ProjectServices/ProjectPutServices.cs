@@ -30,55 +30,62 @@ namespace Application.UseCase.ProjectServices
 
         public async Task<Tasks> UpdateTask(Guid taskId, TasksRequest request)
         {
-             await _validator.Validate(request);
+            await _validator.Validate(request);
 
             try
             {
                 var task = await _taskQuery.GetTaskById(taskId);
-
                 if (task == null)
                 {
                     throw new NotFoundException("Task not found");
                 }
 
-                task.Name = request.Name;
-                task.DueDate = request.DueDate;
-                task.Status = request.Status;
-                task.AssignedTo = request.User;
-                task.UpdateDate = DateTime.Now;
-
+                UpdateTaskFromRequest(task, request);
                 await _projectCommand.UpdateProjectTasks(task);
 
                 var uTask = await _taskQuery.GetTaskById(taskId);
-
                 if (uTask == null)
                 {
                     throw new NotFoundException("Task not found");
                 }
 
-                var tasks = new Tasks
-                {
-                    Id = uTask.TaskID,
-                    Name = uTask.Name,
-                    DueDate = uTask.DueDate,
-                    ProjectId = uTask.ProjectID,
-                    Status = new GenericResponse
-                    {
-                        Id = uTask.TaskStatus.Id,
-                        Name = uTask.TaskStatus.Name
-                    },
-                    UserAssigned = new Users
-                    {
-                        Id = uTask.Users.UserID,
-                        Name = uTask.Users.Name,
-                        Email = uTask.Users.Email
-                    }
-                };
-                return tasks;
+                return MapTaskToResponse(uTask);
             }
-            catch (Exception ex) {
+            catch (Exception ex) 
+            {
                 throw new NotFoundException(ex.Message);
             }
+        }
+
+        private static void UpdateTaskFromRequest(Domain.Entities.Task task, TasksRequest request)
+        {
+            task.Name = request.Name;
+            task.DueDate = request.DueDate;
+            task.Status = request.Status;
+            task.AssignedTo = request.User;
+            task.UpdateDate = DateTime.Now;
+        }
+
+        private static Tasks MapTaskToResponse(Domain.Entities.Task task)
+        {
+            return new Tasks
+            {
+                Id = task.TaskID,
+                Name = task.Name,
+                DueDate = task.DueDate,
+                ProjectId = task.ProjectID,
+                Status = task.TaskStatus != null ? new GenericResponse
+                {
+                    Id = task.TaskStatus.Id,
+                    Name = task.TaskStatus.Name
+                } : null,
+                UserAssigned = task.Users != null ? new Users
+                {
+                    Id = task.Users.UserID,
+                    Name = task.Users.Name,
+                    Email = task.Users.Email
+                } : null
+            };
         }
 
     }

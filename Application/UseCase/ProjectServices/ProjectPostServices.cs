@@ -6,6 +6,7 @@ using Application.Response;
 using FluentValidation;
 using Application.Validators;
 using Application.Interfaces.IValidator;
+using Application.Exceptions;
 
 
 
@@ -29,7 +30,22 @@ namespace Application.UseCase.ProjectServices
         {
             await _validator.Validate(request);
 
-            var project = new Domain.Entities.Project
+            var project = MapRequestToProject(request);
+            await _projectCommand.InsertProject(project);
+
+            var uProject = await _projectQuery.GetProjectById(project.ProjectID);
+            if (uProject == null)
+            {
+                throw new NotFoundException("Project not found");
+            }
+
+            var projectDetails = MapProjectToResponse(uProject);
+            return projectDetails;
+        }
+
+        private static Domain.Entities.Project MapRequestToProject(ProjectRequest request)
+        {
+            return new Domain.Entities.Project
             {
                 ProjectName = request.Name,
                 StartDate = request.Start,
@@ -38,42 +54,39 @@ namespace Application.UseCase.ProjectServices
                 CampaignType = request.CampaignType,
                 CreateDate = DateTime.Now,
             };
+        }
 
-            await _projectCommand.InsertProject(project);
-
-            Domain.Entities.Project uProject = await _projectQuery.GetProjectById(project.ProjectID);
-
-            var projectDetails =  new ProjectDetails
+        private static ProjectDetails MapProjectToResponse(Domain.Entities.Project project)
+        {
+            return new ProjectDetails
             {
                 Data = new Response.Project
                 {
-                    Id = uProject.ProjectID,
-                    Name = uProject.ProjectName,
-                    Start = uProject.StartDate,
-                    End = uProject.EndDate,
-                    Client = new Clients
+                    Id = project.ProjectID,
+                    Name = project.ProjectName,
+                    Start = project.StartDate,
+                    End = project.EndDate,
+                    Client = project.Clients != null ? new Clients
                     {
-                        Id = uProject.Clients.ClientID,
-                        Name = uProject.Clients.Name,
-                        Email = uProject.Clients.Email,
-                        Company = uProject.Clients.Company,
-                        Phone = uProject.Clients.Phone,
-                        Address = uProject.Clients.Address
-                    },
-                    CampaignType = new GenericResponse
+                        Id = project.Clients.ClientID,
+                        Name = project.Clients.Name,
+                        Email = project.Clients.Email,
+                        Company = project.Clients.Company,
+                        Phone = project.Clients.Phone,
+                        Address = project.Clients.Address
+                    } : null,
+                    CampaignType = project.CampaignTypes != null ? new GenericResponse
                     {
-                        Id = uProject.CampaignTypes.Id,
-                        Name = uProject.CampaignTypes.Name
-                    }
+                        Id = project.CampaignTypes.Id,
+                        Name = project.CampaignTypes.Name
+                    } : null
                 },
                 Interactions = new List<Interactions>(),
                 Tasks = new List<Tasks>()
             };
-
-            return projectDetails;
         }
 
-       
+
     }
 
 

@@ -34,14 +34,13 @@ namespace Application.UseCase.ProjectServices
                     throw new NotFoundException("Project not found");
                 }
 
-
                 var data = new Application.Response.Project
                 {
                     Id = project.ProjectID,
                     Name = project.ProjectName,
                     Start = project.StartDate,
                     End = project.EndDate,
-                    Client = new Clients
+                    Client = project.Clients != null ? new Clients
                     {
                         Id = project.ClientID,
                         Name = project.Clients.Name,
@@ -49,47 +48,47 @@ namespace Application.UseCase.ProjectServices
                         Company = project.Clients.Company,
                         Address = project.Clients.Address,
                         Phone = project.Clients.Phone,
-                    },
-                    CampaignType = new GenericResponse
+                    } : null,
+                    CampaignType = project.CampaignTypes != null ? new GenericResponse
                     {
                        Id = project.CampaignTypes.Id,
                        Name = project.CampaignTypes.Name,
-                    }
+                    } : null
                 };
 
 
-                var interactions = project.ListInteractions.Select(interaction => new Interactions
+                var interactions = project.ListInteractions != null ? project.ListInteractions.Select(interaction => new Interactions
                 {
                     Id = interaction.InteractionID,
                     Notes = interaction.Notes,
                     Date = interaction.Date,
                     ProjectId = interaction.ProjectID,
-                    InteractionType = new GenericResponse
+                    InteractionType = interaction.InteractionTypes != null ? new GenericResponse
                     {
                         Id = interaction.InteractionTypes.Id,
                         Name = interaction.InteractionTypes.Name
-                    }
-                }).ToList();
+                    } : null
+                }).ToList() : new List<Interactions>();
 
 
-                var tasks = project.ListTasks.Select(task => new Tasks
+                var tasks = project.ListTasks != null ? project.ListTasks.Select(task => new Tasks
                 {
                     Id = task.TaskID,
                     Name = task.Name,
                     DueDate = task.DueDate,
                     ProjectId = task.ProjectID,
-                    Status = new GenericResponse
+                    Status = task.TaskStatus != null ? new GenericResponse
                     {
                         Id = task.TaskStatus.Id,
                         Name = task.TaskStatus.Name
-                    },
-                    UserAssigned = new Users
+                    } : null,
+                    UserAssigned = task.Users != null ? new Users
                     {
                         Id = task.Users.UserID,
                         Name = task.Users.Name,
                         Email = task.Users.Email
-                    }
-                }).ToList();
+                    } : null
+                }).ToList() : new List<Tasks>();
 
 
                 return await System.Threading.Tasks.Task.FromResult(new ProjectDetails
@@ -119,7 +118,7 @@ namespace Application.UseCase.ProjectServices
                     Name = project.ProjectName,
                     Start = project.StartDate,
                     End = project.EndDate,
-                    Client = new Clients
+                    Client = project.Clients != null ? new Clients
                     {
                         Id = project.Clients.ClientID,
                         Name = project.Clients.Name,
@@ -127,12 +126,12 @@ namespace Application.UseCase.ProjectServices
                         Company = project.Clients.Company,
                         Phone = project.Clients.Phone,
                         Address = project.Clients.Address
-                    },
-                    CampaignType = new GenericResponse
+                    } : null,
+                    CampaignType = project.CampaignTypes != null ? new GenericResponse
                     {
                         Id = project.CampaignTypes.Id,
                         Name = project.CampaignTypes.Name
-                    }
+                    } : null
                 };
 
                 responseProjects.Add(responseProject);
@@ -140,7 +139,68 @@ namespace Application.UseCase.ProjectServices
 
             return responseProjects;
         }
+
+        private Application.Response.Project MapToProjectResponse(Domain.Entities.Project project)
+        {
+            return new Application.Response.Project
+            {
+                Id = project.ProjectID,
+                Name = project.ProjectName,
+                Start = project.StartDate,
+                End = project.EndDate,
+                Client = project.Clients != null ? new Clients
+                {
+                    Id = project.ClientID,
+                    Name = project.Clients.Name,
+                    Email = project.Clients.Email,
+                    Company = project.Clients.Company,
+                    Address = project.Clients.Address,
+                    Phone = project.Clients.Phone
+                } : null,
+                CampaignType = project.CampaignTypes != null ? new GenericResponse
+                {
+                    Id = project.CampaignTypes.Id,
+                    Name = project.CampaignTypes.Name
+                } : null
+            };
+        }
+
+        private List<Interactions> MapInteractionListToResponseList(ICollection<Domain.Entities.Interaction> interactions)
+        {
+            return interactions?.Select(interaction => new Interactions
+            {
+                Id = interaction.InteractionID,
+                Notes = interaction.Notes,
+                Date = interaction.Date,
+                ProjectId = interaction.ProjectID,
+                InteractionType = interaction.InteractionTypes != null ? new GenericResponse
+                {
+                    Id = interaction.InteractionTypes.Id,
+                    Name = interaction.InteractionTypes.Name
+                } : null
+            }).ToList() ?? new List<Interactions>();
+        }
+
+        private List<Tasks> MapToTasksList(ICollection<Domain.Entities.Task> tasks)
+        {
+            return tasks?.Select(task => new Tasks
+            {
+                Id = task.TaskID,
+                Name = task.Name,
+                DueDate = task.DueDate,
+                ProjectId = task.ProjectID,
+                Status = task.TaskStatus != null ? new GenericResponse
+                {
+                    Id = task.TaskStatus.Id,
+                    Name = task.TaskStatus.Name
+                } : null,
+                UserAssigned = task.Users != null ? new Users
+                {
+                    Id = task.Users.UserID,
+                    Name = task.Users.Name,
+                    Email = task.Users.Email
+                } : null
+            }).ToList() ?? new List<Tasks>();
+        }
     }
-
-
 }

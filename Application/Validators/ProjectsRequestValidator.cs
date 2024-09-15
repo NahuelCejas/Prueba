@@ -45,8 +45,11 @@ namespace Application.Validators
         }
 
         
-        private async Task<bool> BeUniqueName(string name, CancellationToken token) // Check that Project Name is unique
+        private async Task<bool> BeUniqueName(string? name, CancellationToken token) // Check that Project Name is unique
         {
+            if (string.IsNullOrEmpty(name))
+                return false;
+
             var existingProject = await _projectQuery.GetProjectByName(name);
             return existingProject == null;  
         }

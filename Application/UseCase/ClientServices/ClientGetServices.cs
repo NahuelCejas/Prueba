@@ -24,23 +24,27 @@ namespace Application.UseCase.ClientServices
         public async Task<List<Clients>> GetAll()
         {
             var list = await _query.GetListClients();
-
             List<Clients> listClients = new List<Clients>();
 
             foreach (Client item in list)
             {
-                Clients clients = new Clients();
-
-                clients.Id = item.ClientID;
-                clients.Name = item.Name;
-                clients.Phone = item.Phone;
-                clients.Address = item.Address;
-                clients.Company = item.Company;
-                clients.Email = item.Email;
-
-                listClients.Add(clients);
+                listClients.Add(MapClientToResponse(item));
             }
-            return listClients;
+
+            return listClients;            
+        }
+
+        private static Clients MapClientToResponse(Client item)
+        {
+            return new Clients
+            {
+                Id = item.ClientID,
+                Name = item.Name,
+                Phone = item.Phone,
+                Address = item.Address,
+                Company = item.Company,
+                Email = item.Email
+            };
         }
     }
 }

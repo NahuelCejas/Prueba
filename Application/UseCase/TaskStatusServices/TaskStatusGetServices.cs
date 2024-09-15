@@ -34,7 +34,6 @@ namespace Application.UseCase.TaskStatusServices
                 response.Name = item.Name;
 
                 listResponse.Add(response);
-
             }
 
             return listResponse;
