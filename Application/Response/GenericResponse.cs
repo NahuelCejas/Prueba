@@ -10,10 +10,6 @@ namespace Application.Response
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-
-        public static implicit operator int(GenericResponse v)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

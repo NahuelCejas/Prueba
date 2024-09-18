@@ -26,7 +26,7 @@ namespace TP1_Rocio_Kreick.Controllers
         public async Task<IActionResult> GetAll()
         {
             var result = await _services.GetAll();
-            return new JsonResult(result);
+            return new JsonResult(result) { StatusCode = 200 };
         }
     }
 }

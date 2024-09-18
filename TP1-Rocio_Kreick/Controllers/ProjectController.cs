@@ -92,10 +92,10 @@ namespace TP1_Rocio_Kreick.Controllers
             {
                 var result = await _projectGetService.GetProjectById(id);
                 return new JsonResult(result) { StatusCode = 200 };
-            }
+            }            
             catch (NotFoundException ex)
             {
-                return new JsonResult(new ApiError { Message = ex.Message }) { StatusCode = 404 };
+                return new JsonResult(new ApiError { Message = ex.Message }) { StatusCode = 404 };               
             }
         }
 
@@ -108,14 +108,14 @@ namespace TP1_Rocio_Kreick.Controllers
         /// <response code="200">Success</response>
         /// <returns>The project interactions.</returns>
         [HttpPatch("{id}/interactions")]
-        [ProducesResponseType(typeof(Interactions), 200)]
+        [ProducesResponseType(typeof(Interactions), 201)]
         [ProducesResponseType(typeof(ApiError), 400)]
         public async Task<IActionResult> AddInteraction([FromRoute] Guid id, [FromBody] InteractionsRequest request)
         {
             try
             {
                 var result = await _projectPatchService.AddInteraction(id, request);
-                return new JsonResult(result) { StatusCode = 200 };
+                return new JsonResult(result) { StatusCode = 201 };
             }
             catch (ValidationException ex)
             {
@@ -132,14 +132,14 @@ namespace TP1_Rocio_Kreick.Controllers
         /// <response code="200">Success</response>
         /// <returns>The project interactions.</returns>
         [HttpPatch("{id}/tasks")]
-        [ProducesResponseType(typeof(Tasks), 200)]
+        [ProducesResponseType(typeof(Tasks), 201)]
         [ProducesResponseType(typeof(ApiError), 400)]
         public async Task<IActionResult> AddTask([FromRoute] Guid id, [FromBody] TasksRequest request)
         {
             try
             {
                 var result = await _projectPatchService.AddTask(id, request);
-                return new JsonResult(result) { StatusCode = 200 };
+                return new JsonResult(result) { StatusCode = 201 };
             }
             catch (ValidationException ex)
             {

@@ -1,4 +1,5 @@
 ﻿
+using Application.Exceptions;
 using Application.Interfaces.IQuery;
 using Application.Request;
 using FluentValidation;
@@ -44,17 +45,22 @@ namespace Application.Validators
                 .WithMessage("The campaignType must be a number between 1 and 4.");            
         }
 
-        
-        private async Task<bool> BeUniqueName(string? name, CancellationToken token) // Check that Project Name is unique
-        {
-            if (string.IsNullOrEmpty(name))
-                return false;
 
-            var existingProject = await _projectQuery.GetProjectByName(name);
-            return existingProject == null;  
+        private async Task<bool> BeUniqueName(string name, CancellationToken token)
+        {
+            try
+            {
+                var project = await _projectQuery.GetProjectByName(name);
+                return project == null;
+            }
+            catch (NotFoundException)
+            {
+                // If the project is not found, we consider the name to be unique
+                return true;
+            }
         }
 
-        
+
         private static bool BeValidEndDate(DateTime? start, DateTime? end) // Check that End is not before Start
         {
             return end > start; 

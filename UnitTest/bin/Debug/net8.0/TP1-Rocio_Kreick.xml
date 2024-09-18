@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TP1-Rocio_Kreick</name>
+    </assembly>
+    <members>
+        <member name="M:TP1_Rocio_Kreick.Controllers.CampaignTypeController.GetAll">
+             <summary>
+             Retrieves a list of all  campaign types.
+            </summary>
+             <response code="200"> Success </response>
+        </member>
+        <member name="M:TP1_Rocio_Kreick.Controllers.ClientController.GetAll">
+             <summary>
+             Retrieves a list of all clients.
+            </summary>
+             <response code="200"> Success </response>
+        </member>
+        <member name="M:TP1_Rocio_Kreick.Controllers.ClientController.CreateClient(Application.Models.ClientsRequest)">
+            <summary>
+            Creates a new client with the provided details.
+            </summary> 
+            <param name="request">The details of the client to be created.</param>
+            <response code="201">Success</response>
+        </member>
+        <member name="M:TP1_Rocio_Kreick.Controllers.InteractionTypesController.GetAll">
+            <summary>
+            Retrieves a list of all interaction types.
+            </summary>
+            <response code="200"> Success </response>
+        </member>
+        <member name="M:TP1_Rocio_Kreick.Controllers.ProjectController.GetProjects(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Retrieves a list of projects based on the provided filters such as
+            project name, campaign type, client, with optional pagination
+            parameters.
+            </summary>
+            <param name="name">Optional. Filter by project name.</param>
+            <param name="campaign">Optional. Filter by campaign type ID.</param>
+            <param name="client">Optional. Filter by client ID.</param>
+            <param name="offset">Optional. Skip the specified number of records (used for pagination).</param>
+            <param name="size">Optional. Limit the number of records returned (used for pagination).</param>
+            <response code="200">Success</response>
+            /// <returns>A list of projects that match the specified filters.</returns>
+        </member>
+        <member name="M:TP1_Rocio_Kreick.Controllers.ProjectController.CreateProject(Application.Request.ProjectRequest)">
+            <summary>
+            Creates a new project with the specified details.
+            </summary> 
+            <param name="request">The details of the project to be created.</param>
+            <response code="201">Success</response>
+        </member>
+        <member name="M:TP1_Rocio_Kreick.Controllers.ProjectController.GetProjectById(System.Guid)">
+            <summary>
+            Retrieves detailed information about a specific project by its ID.
+            </summary>
+            <param name="id">The unique identifier of the project.</param>
+            <response code="200">Success</response>
+            <returns>The project details.</returns>
+        </member>
+        <member name="M:TP1_Rocio_Kreick.Controllers.ProjectController.AddInteraction(System.Guid,Application.Request.InteractionsRequest)">
+            <summary>
+            Adds a new interaction to an existing project.
+            </summary>
+            <param name="id">The unique identifier of the project.</param>
+            <param name="request">The details of the interaction to be added.</param>
+            <response code="200">Success</response>
+            <returns>The project interactions.</returns>
+        </member>
+        <member name="M:TP1_Rocio_Kreick.Controllers.ProjectController.AddTask(System.Guid,Application.Models.TasksRequest)">
+            <summary>
+            Adds a new task to an existing project.
+            </summary>
+            <param name="id">The unique identifier of the project.</param>
+            <param name="request">The details of the task to be added.</param>
+            <response code="200">Success</response>
+            <returns>The project interactions.</returns>
+        </member>
+        <member name="M:TP1_Rocio_Kreick.Controllers.ProjectController.UpdateTask(System.Guid,Application.Models.TasksRequest)">
+            <summary>
+            Updates an existing task with the specified details.
+            </summary>
+            <param name="id">The unique identifier of the task to be updated.</param>
+            <param name="request">The updated details of the task.</param>
+            <response code="200">Success</response>         
+        </member>
+        <member name="M:TP1_Rocio_Kreick.Controllers.TaskStatusController.GetAll">
+            <summary>
+            Retrieves a list of all task statuses.
+            </summary>
+            <response code="200"> Success </response>
+        </member>
+        <member name="M:TP1_Rocio_Kreick.Controllers.UserController.GetAll">
+             <summary>
+             Retrieves a list of all users.
+            </summary>
+             <response code="200"> Success </response>
+        </member>
+    </members>
+</doc>

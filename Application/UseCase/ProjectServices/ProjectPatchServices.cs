@@ -23,7 +23,7 @@ namespace Application.UseCase.ProjectServices
         private readonly ITaskQuery _taskQuery;
         private readonly IInteractionQuery _interactionQuery;
         private readonly IValidatorHandler<TasksRequest> _tasksValidator;
-        private readonly IValidatorHandler<InteractionsRequest> _interactionsValidator;
+        private readonly IValidatorHandler<InteractionsRequest> _interactionsValidator;        
 
         public ProjectPatchServices(IProjectQuery projectQuery, IProjectCommand projectCommand, ITaskQuery taskQuery, IInteractionQuery interactionQuery, IValidatorHandler<TasksRequest> tasksValidator, IValidatorHandler<InteractionsRequest> interactionsValidator)
         {
@@ -33,8 +33,7 @@ namespace Application.UseCase.ProjectServices
             _interactionQuery = interactionQuery;
             _tasksValidator = tasksValidator;
             _interactionsValidator = interactionsValidator;
-        }
-
+        }        
 
         public async Task<Interactions> AddInteraction(Guid projectId, InteractionsRequest request)
         {
